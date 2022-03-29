@@ -2,20 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 
-const classroomController = require('./../controllers/classroomController');
+const classroomController = require('../controller/classroomController');
 // const authController = require('./../controllers/authController');
 
 
 router
     .route('/')
-    .get(classroomController.getAllClassrooms); 
+    .get(classroomController.getAllClassrooms)
+    .post(classroomController.insertClassroom)
     
 
-// router
-//     .route('/:classroomId')
-//     .get(classroomController.getOrderByTableNumber) 
-//     .post(classroomController.confirmOrder)  
-//     .patch(classroomController.updateOrderByTableNumber)  
-//     .delete(classroomController.removeOrderByTableNumber); 
+router
+    .route('/:classroomId')
+    .put(classroomController.updateClassroom)
 
 module.exports = router;

@@ -12,8 +12,15 @@ app.use(express.json())
 dotenv.config({ path: './config/config.env'})
 console.log(process.env.AZURE_COSMOSDB_URL)
 
-app.use('/api',require('./routes/personRouter'))
+app.use('/api/v1/account',require('./routes/personRouter'))
 // app.use('/api/v1/shop', require('./routes/'))
+ 
+app.use('/test', (req, res) => {
+    
+    console.log(req);  
+    res.send('Hello World!! Testing success');
+})
+app.use('/api/v1/classroom', require('./routes/classroomRouter'))
 
 
 const PORT = process.env.PORT || 5000;

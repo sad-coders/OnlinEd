@@ -5,7 +5,7 @@ const router = express.Router();
 const personController = require('./../controller/personController');
 
 router
-    .route('/account')
+    .route('/')
     .get(personController.getAllAccounts)
     .post(personController.createAccount) 
  
