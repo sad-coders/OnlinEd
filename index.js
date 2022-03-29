@@ -1,37 +1,7 @@
-<<<<<<< HEAD
-const express = require("express");
-const dotenv = require("dotenv");
-=======
-const express = require('express')
-const dotenv = require('dotenv')
- 
-const cors = require('cors');
-const path = require('path');
-const db = require('./model/db.js');
- 
-const app = express()
-app.use(cors())
-app.use(express.json())
-
-dotenv.config({ path: './config/config.env'})
-console.log(process.env.AZURE_COSMOSDB_URL)
-
-app.use('/api/v1/account',require('./routes/personRouter'))
-// app.use('/api/v1/shop', require('./routes/'))
-app.use('/api/v1/assignment',require('./routes/assignmentRouter'))
-
-app.use('/test', (req, res) => {
-    
-    console.log(req);  
-    res.send('Hello World!! Testing success');
-})
-app.use('/api/v1/classroom', require('./routes/classroomRouter'))
->>>>>>> 4e02e9b96cc7a683bad285c49a1756466d98b84e
-
 const cors = require("cors");
 const path = require("path");
 const db = require("./model/db.js");
-
+const dotenv = require("dotenv");
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -49,7 +19,11 @@ app.use("/test", (req, res) => {
 });
 
 //routers.
+app.use("/api/v1/account", require("./routes/personRouter"));
+app.use("/api/v1/assignment", require("./routes/assignmentRouter"));
+
 app.use("/api/v1/classroom", require("./routes/classroomRouter"));
+
 app.use("/api/v1/solution", solution);
 app.use("/api/v1/discussion", discussion);
 
