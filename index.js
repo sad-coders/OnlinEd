@@ -14,7 +14,8 @@ console.log(process.env.AZURE_COSMOSDB_URL)
 
 app.use('/api/v1/account',require('./routes/personRouter'))
 // app.use('/api/v1/shop', require('./routes/'))
- 
+app.use('/api/v1/assignment',require('./routes/assignmentRouter'))
+
 app.use('/test', (req, res) => {
     
     console.log(req);  
