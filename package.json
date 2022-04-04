@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/sad-coders/OnlinEd#readme",
   "dependencies": {
+    "@sendgrid/mail": "^7.6.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
