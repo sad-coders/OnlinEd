@@ -19,6 +19,7 @@ app.use("/test", (req, res) => {
   res.send("Hello World!! Testing success");
 });
 
+
 //routers.
 app.use("/api/v1/account", require("./routes/personRouter"));
 app.use("/api/v1/assignment", require("./routes/assignmentRouter"));
@@ -28,6 +29,8 @@ app.use("/api/v1/mail", require("./routes/mailRouter"));
 
 app.use("/api/v1/solution", solution);
 app.use("/api/v1/discussion", discussion);
+
+app.use("/api/v1/auth/",require("./routes/authRouter"))
 
 const PORT = process.env.PORT || 5000;
 

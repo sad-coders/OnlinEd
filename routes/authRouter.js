@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
-
-
 const authController = require('../controller/authController'); 
-
+const verifyToken = authController.verifyToken
 
 router.route('/login').post(authController.login);
+router.route('/protected').get(verifyToken,authController.getProtectedResource);
 router.route('/signup').post(authController.signup);
 
 // router.get('/logout', authController.logout);
@@ -13,3 +12,4 @@ router.route('/signup').post(authController.signup);
 // router.patch('/resetPassword/:token', authController.resetPassword);
 // router.delete('/delete/:user_id', authController.deleteUser);
     
+module.exports = router
