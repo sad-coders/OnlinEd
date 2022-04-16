@@ -15,6 +15,7 @@ router
 
 router
     .route('/:classroomId')
+    .get(classroomController.getClassroomsOfPerson)
     .put(classroomController.updateClassroom)
 
 module.exports = router;

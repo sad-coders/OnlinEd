@@ -5,7 +5,7 @@ async function getAllAssignments(request,response){
     const connection = db.getConnection();
     var assignments = await connection.collection('assignment').find({}).toArray();
     response.status(200).json(assignments);
-}
+}    
 async function getAssignment(request,response){
     const connection = db.getConnection();
     console.log(request.params.assignment_id)
