@@ -11,5 +11,6 @@ router
 router
     .route('/:person_id')
     .put(personController.updatePerson)
-    .get(personController.getPerson)
+    //.get(personController.getPerson)
+
 module.exports = router
