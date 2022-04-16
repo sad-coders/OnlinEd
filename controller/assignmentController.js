@@ -1,3 +1,4 @@
+const req = require('express/lib/request');
 const db = require('../model/db')
 
 async function getAllAssignments(request,response){
@@ -17,6 +18,8 @@ async function createAssignment(request,response){
         dueDate :  request.body.due_date,
         postedOn : request.body.posted_on,
         postedBy : request.body.posted_by,
+        authorName: request.body.authorName,
+        assignmentTitle : request.body.assignmentTitle,
         classroomId : request.body.classroom_id,
         content : request.body.content,
         link : request.body.link
