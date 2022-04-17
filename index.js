@@ -4,6 +4,7 @@ const path = require("path");
 const db = require("./model/db.js");
 const dotenv = require("dotenv");
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
@@ -30,7 +31,7 @@ app.use("/api/v1/mail", require("./routes/mailRouter"));
 app.use("/api/v1/solution", solution);
 app.use("/api/v1/discussion", discussion);
 
-app.use("/api/v1/auth/",require("./routes/authRouter"))
+app.use("/api/v1/auth",require("./routes/authRouter"))
 
 const PORT = process.env.PORT || 5000;
 
