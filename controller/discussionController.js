@@ -2,7 +2,6 @@ const db = require("../model/db.js");
 const COLLECTION_NAME = "discussion";
 
 // new routes.
-
 exports.getAllQuestionOfClassRoom = async (req, res, next) => {
   try {
     const connection = db.getConnection();
@@ -30,9 +29,6 @@ exports.addQuestion = async (req, res, next) => {
     var question = req.body.question;
 
     console.log(question);
-    //set at backend.
-    // question.parentId = "";
-    // question.type = "question";
 
     var insertQuestion = await connection
       .collection(COLLECTION_NAME)
