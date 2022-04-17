@@ -3,8 +3,6 @@ const router = express.Router();
 
 const discussionController = require("../controller/discussionController.js");
 
-// router.route("/Author/:AuthorId").get(discussionController.getByAuthorId);
-
 // new Routers.
 // get all the question of the classroom
 
