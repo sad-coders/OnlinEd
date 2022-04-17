@@ -1,7 +1,11 @@
 const db = require("../model/db");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+
+const mailController = require('./mailController')
+
 const saltRounds = 10
+
 const signup = async function(request, response) {
     
     const connection = db.getConnection();
@@ -9,21 +13,45 @@ const signup = async function(request, response) {
     const user = {
       email : request.body.email,
       password : hashedPassword,
-      isFaculty : request.body.isFaculty
+      isFaculty : request.body.isFaculty,
+      isVerified: false
     }
     try{
-      const _user = await connection.collection("authentication").insertOne(user)
+      const dbResponse = await connection.collection("authentication").insertOne(user)
       const token = jwt.sign({
-           email : _user.email
+           email : request.body.email,
         }, 
-        process.env.secret,{
+        process.env.secret,
+        {
         expiresIn: 86400 // expires in 24 hours
       });
+
+      console.log(dbResponse);
+
+      mailController.sendConfirmationMail(request.body.email, dbResponse.insertedId)
+      
       response.status(200).send({ auth: true, token: token });
     }catch(error){
+      console.log(error);
       response.status(500).send({ message : "Failed to authenticate"})
     }
 }
+
+const verify = async function(request, response) {
+  try{
+    console.log(request.params.userid);
+    const connection = db.getConnection();
+    const dbResponse = await connection.collection("authentication").updateOne({ _id: request.params.userid }, { $set: {"isVerified" : true} });
+
+    console.log(dbResponse);
+    
+    response.status(200).send({ auth: true, verificationStatus: 'verified' });
+  }catch(error){
+    console.log(error);
+    response.status(500).send({ message : "Failed to authenticate", verificationStatus: 'failed'})
+  }
+}
+
 const verifyToken = async (request,response,next)=>{
     const token = request.headers['x-access-token'];
     
@@ -35,9 +63,11 @@ const verifyToken = async (request,response,next)=>{
       next()
     });
 }
+
 const getProtectedResource = async (request,response,next)=>{
   response.status(200).send("protected resource")
 }
+
 const login = async function(request,response){
   const connection = db.getConnection();
   const user = {
@@ -63,5 +93,6 @@ module.exports = {
   signup,
   login,
   getProtectedResource,
-  verifyToken
+  verifyToken,
+  verify
 }

@@ -6,6 +6,7 @@ const verifyToken = authController.verifyToken
 router.route('/login').post(authController.login);
 router.route('/protected').get(verifyToken,authController.getProtectedResource);
 router.route('/signup').post(authController.signup);
+router.route('/verify/:userid').post(authController.verify);
 
 // router.get('/logout', authController.logout);
 // router.post('/forgotPassword', authController.forgotPassword);
