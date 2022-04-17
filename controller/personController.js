@@ -28,6 +28,7 @@ async function getPerson(request,response){
     var person = await connection.collection('person').find({_id:request.params.person_id}).toArray();
     response.status(200).json(person[0]);
 }
+
 async function updatePerson(request,response){
     const connection = db.getConnection();
     try{
