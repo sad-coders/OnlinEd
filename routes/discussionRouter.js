@@ -3,17 +3,11 @@ const router = express.Router();
 
 const discussionController = require("../controller/discussionController.js");
 
-// router
-//   .route("/")
-//   .get(discussionController.getAlldiscussion)
-//   .post(discussionController.insertdiscussion)
-//   .delete(discussionController.deletedicussion)
-//   .put(discussionController.updatediscussion);
-
 // router.route("/Author/:AuthorId").get(discussionController.getByAuthorId);
 
 // new Routers.
 // get all the question of the classroom
+
 router
   .route("/classroom/:classRoomId")
   .get(discussionController.getAllQuestionOfClassRoom)
