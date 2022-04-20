@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+    webapp-server:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      image: onlined.azurecr.io/onlined-backend
+      container_name: onlined-backend
+      env_file: ./config/config.env
+      networks:
+        - app-network
+
+    react-frontend:
+      build:
+        context: ../frontend/client
+        dockerfile: Dockerfile 
+      image: onlined.azurecr.io/onlined-frontend
+      container_name: onlined-frontend
+      networks:
+        - app-network
+
+networks:
+  app-network:
+    driver: bridge
