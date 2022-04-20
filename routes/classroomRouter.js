@@ -15,7 +15,7 @@ router
 
 router
     .route('/:classroomId')
-    .get(classroomController.getClassroomsOfPerson)
+    .get(classroomController.getClassroom)
     .put(classroomController.updateClassroom)
 
 router
