@@ -241,25 +241,35 @@ exports.insertSolution = async (req, res, next) => {
 exports.updateSolution = async (req, res, next) => {
   const connection = db.getConnection();
   try {
-    let { studentId, assignmentId, link, date, deadline, _id } =
+    let { link, _id } =
       req.body.solution;
 
     let solutionId = _id;
 
-    //   console.log(studentId, assignmentId, link, date, deadline, _id);
+    var newMarks,  newObj;
 
+    if(req.body.solution.marks) {
+      newMarks = req.body.solution.marks;
+      newObj = {
+        link: link,
+        marks: marks
+      };
+    }else {
+      newObj = {
+        link: link,
+        dateOfSubmission: Date.now()
+      }
+    }
+
+    console.log('updating ' + solutionId + ' with link ' + link + ' with marks ' + newMarks)
+    //   console.log(studentId, assignmentId, link, date, deadline, _id);
+    
     var updatedSolution = await connection
       .collection(COLLECTION_NAME)
       .updateOne(
         { _id: solutionId },
         {
-          $set: {
-            studentId: studentId,
-            assignmentId: assignmentId,
-            link: link,
-            date: date,
-            deadline: deadline,
-          },
+          $set: newObj,
         }
       );
     console.log(updatedSolution);

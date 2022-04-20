@@ -18,4 +18,8 @@ router
     .get(classroomController.getClassroomsOfPerson)
     .put(classroomController.updateClassroom)
 
+router
+    .route('/:classroomId/addStudents')
+    .post(classroomController.addStudentsToClassroom)
+
 module.exports = router;

@@ -1,5 +1,9 @@
 const req = require('express/lib/request');
-const db = require('../model/db')
+const db = require('../model/db');
+
+const classroomController = require('./classroomController');
+const solutionController = require('./solutionController');
+
 
 async function getAllAssignments(request,response){
     const connection = db.getConnection();
@@ -25,7 +29,30 @@ async function createAssignment(request,response){
         link : request.body.link
     }
     const assignment = await connection.collection('assignment').insertOne(new_assignment);
-    response.status(201).json(assignment)
+    var classroom = await connection.collection('classrooms').find({_id:request.body.classroom_id}).toArray();
+    classroom = classroom[0];
+    var students = classroom.students;
+    for(var x = 0; x < students.length; x++) {
+        try{
+            var res = await connection
+                        .collection('solution')
+                        .insertOne({
+                            studentId: students[x].studentId,
+                            assignmentId: assignment.insertedId,
+                            link: '',
+                            dateOfSubmission: '',
+                            deadline: request.body.due_date,
+                            marks: null
+                        });
+        }catch(e) {
+            console.log(e);
+            response.status(404).json("assignment could not be added")
+        }
+    } 
+
+    response.status(201).json({
+        "status" : "success"
+    })
 }
 async function updateAssignment(request,response){
     const connection = db.getConnection();
