@@ -27,7 +27,7 @@ exports.getSolutionByAssignmentId = async (req, res, next) => {
   const connection = db.getConnection();
 
   try {
-    let assignmentId = req.params.AssignmentId;
+    let assignmentId = req.params.assignmentId;
     console.log(assignmentId);
 
     var solutions = await connection

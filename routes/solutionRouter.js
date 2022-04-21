@@ -14,7 +14,7 @@ router
   .get(solutionController.getSolutionByStudentId);
 
 router
-  .route("/assignment/:AssignmentId")
+  .route("/assignment/:assignmentId")
   .get(solutionController.getSolutionByAssignmentId);
 
 router

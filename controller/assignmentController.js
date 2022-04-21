@@ -38,7 +38,7 @@ async function createAssignment(request,response){
         authorName: new_assignment.authorName
     }
     var classroom = await connection.collection('classrooms').findOneAndUpdate({_id:request.body.classroom_id}, 
-        { $set: {assignments : obj} }, {returnNewDocument: true});
+        { $push: {assignments : obj} }, {returnNewDocument: true});
     classroom = classroom.value;
     console.log(classroom);
     var students = classroom.students;
@@ -50,7 +50,7 @@ async function createAssignment(request,response){
                             .collection('solution')
                             .insertOne({
                                 studentId: students[x].studentId,
-                                assignmentId: assignment.insertedId,
+                                assignmentId: assignment.insertedId.toString(),
                                 link: '',
                                 dateOfSubmission: '',
                                 deadline: request.body.due_date,
