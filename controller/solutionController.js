@@ -238,47 +238,56 @@ exports.insertSolution = async (req, res, next) => {
   });
 };
 
-exports.updateSolution = async (req, res, next) => {
+updateSolution = async (req) => {
   const connection = db.getConnection();
+  console.log(req)
   try {
-    let { link, _id } =
-      req.body.solution;
-
+    let { _id } = req.body.solution;
+    console.log(req.body.solution)
     let solutionId = _id;
 
-    var newMarks,  newObj;
+    var newMarks,  newObj, newLink;
 
     if(req.body.solution.marks) {
       newMarks = req.body.solution.marks;
       newObj = {
-        link: link,
-        marks: marks
+        marks: newMarks
       };
     }else {
+      newLink = req.body.solution
       newObj = {
-        link: link,
+        link: newLink,
         dateOfSubmission: Date.now()
       }
     }
 
-    console.log('updating ' + solutionId + ' with link ' + link + ' with marks ' + newMarks)
+    console.log('updating ' + solutionId + ' with link ' + newLink + ' with marks ' + newMarks)
     //   console.log(studentId, assignmentId, link, date, deadline, _id);
     
     var updatedSolution = await connection
       .collection(COLLECTION_NAME)
-      .updateOne(
-        { _id: solutionId },
-        {
-          $set: newObj,
-        }
+      .findOneAndUpdate({_id: solutionId}, 
+        { $set: newObj}
       );
-    console.log(updatedSolution);
+    // console.log(updatedSolution);
+    return updatedSolution.value;
 
-    res.status(200).json({ status: "success", updatedSolution });
   } catch (error) {
-    res.status(500).send({ message: "Failed" });
+    console.log(error);
+    return error;
   }
 };
+
+exports.marksForSolution = async(req,res,next) => {
+  try{
+    console.log(req.body.solution)
+    var updatedSolution = await updateSolution(req);
+
+    res.status(200).json({ status: "success", updatedSolution });
+  }catch (error) {
+    res.status(500).send({ message: "Failed" });
+  }
+}
 
 exports.deleteSolution = async (req, res, next) => {
   const connection = db.getConnection();

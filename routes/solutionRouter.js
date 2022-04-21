@@ -7,7 +7,7 @@ router
   .route("/")
   .post(solutionController.insertSolution)
   .delete(solutionController.deleteSolution)
-  .put(solutionController.updateSolution);
+  .put(solutionController.marksForSolution); //marks for soln
 
 router
   .route("/student/:StudentId")
