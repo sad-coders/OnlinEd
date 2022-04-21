@@ -267,9 +267,10 @@ updateSolution = async (req) => {
     var updatedSolution = await connection
       .collection(COLLECTION_NAME)
       .findOneAndUpdate({_id: solutionId}, 
-        { $set: newObj}
+        { $set: newObj},
+        {returnDocument: 'after',returnNewDocument: true}
       );
-    // console.log(updatedSolution);
+    console.log(updatedSolution);
     return updatedSolution.value;
 
   } catch (error) {
