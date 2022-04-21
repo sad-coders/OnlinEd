@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const mailController = require('./mailController')
+const personController = require('./personController')
 
 const saltRounds = 10
 
@@ -26,9 +27,17 @@ const signup = async function(request, response) {
         expiresIn: 86400 // expires in 24 hours
       });
 
-      console.log(dbResponse);
+      // console.log(dbResponse);
 
-      mailController.sendConfirmationMail(request.body.email, dbResponse.insertedId)
+      mailController.sendConfirmationMail(request.body.email, dbResponse.insertedId);
+      var person = {
+            name : request.body.name,
+            email : request.body.email,
+            profilePic : request.body.profile_pic,
+            classrooms : [],
+            isStudent : !request.body.isFaculty
+      }
+      personController.addnewPerson(person);
       
       response.status(200).send({ auth: true, token: token });
     }catch(error){

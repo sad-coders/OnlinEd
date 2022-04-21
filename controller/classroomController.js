@@ -51,6 +51,7 @@ exports.getClassroom = async(req,res,next)=>{
   res.status(200).json(classroom)
 
 }
+
 exports.insertClassroom = async (req, res, next) => {
   const connection = db.getConnection();
   var classroom = req.body.classroom;
