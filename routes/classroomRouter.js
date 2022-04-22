@@ -10,7 +10,7 @@ router
     .route('/')
     //.get(classroomController.getAllClassrooms)
     .get(classroomController.getClassroomsOfPerson)//get request with email query (needs to be modified with token)
-    .post(classroomController.insertClassroom)
+    .post(classroomController.createClassroom)
     
 
 router
