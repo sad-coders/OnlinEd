@@ -80,13 +80,13 @@ const getProtectedResource = async (request,response,next)=>{
 const login = async function(request,response){
   const connection = db.getConnection();
   const user = {
-    email : request.body.email,
+    email : request.body.email, 
     password : request.body.password
   }
 
   var _user = await connection.collection('authentication').find({ email : user.email }).toArray();
   
-  if (_user.length===0) return res.status(404).send('user not found');
+  if (_user.length===0) return response.status(404).send('user not found');
   _user = _user[0];
   const passwordIsValid = bcrypt.compareSync(user.password,_user.password);
   //console.log(passwordIsValid)
@@ -96,7 +96,9 @@ const login = async function(request,response){
     expiresIn: 86400 // expires in 24 hours
   });
 
-  response.status(200).send({ auth: true, token: token });
+  var person = await connection.collection('person').find({email: user.email}).toArray();
+  person = person[0];
+  response.status(200).send({ auth: true, token, person});
 }
 module.exports = {
   signup,

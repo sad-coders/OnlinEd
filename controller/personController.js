@@ -4,11 +4,8 @@ const addnewPerson = async(person) => {
     const connection = db.getConnection();
     // const person = 
 
-    const res = await connection.collection('person').insertOne(person, function(err, result) {
-    // assert.equal(err, null);
-    
-    console.log("Inserted a document into the families collection.", res.insertedId);
-    });
+    const res = await connection.collection('person').insertOne(person);
+    console.log(res.insertedId)
     return res;
 }
 
