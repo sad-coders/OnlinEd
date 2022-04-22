@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const mailController = require('./mailController')
+const personController = require('./personController')
 
 const saltRounds = 10
 
@@ -26,9 +27,17 @@ const signup = async function(request, response) {
         expiresIn: 86400 // expires in 24 hours
       });
 
-      console.log(dbResponse);
+      // console.log(dbResponse);
 
-      mailController.sendConfirmationMail(request.body.email, dbResponse.insertedId)
+      mailController.sendConfirmationMail(request.body.email, dbResponse.insertedId);
+      var person = {
+            name : request.body.name,
+            email : request.body.email,
+            profilePic : request.body.profile_pic,
+            classrooms : [],
+            isStudent : !request.body.isFaculty
+      }
+      personController.addnewPerson(person);
       
       response.status(200).send({ auth: true, token: token });
     }catch(error){
@@ -71,13 +80,13 @@ const getProtectedResource = async (request,response,next)=>{
 const login = async function(request,response){
   const connection = db.getConnection();
   const user = {
-    email : request.body.email,
+    email : request.body.email, 
     password : request.body.password
   }
 
   var _user = await connection.collection('authentication').find({ email : user.email }).toArray();
   
-  if (_user.length===0) return res.status(404).send('user not found');
+  if (_user.length===0) return response.status(404).send('user not found');
   _user = _user[0];
   const passwordIsValid = bcrypt.compareSync(user.password,_user.password);
   //console.log(passwordIsValid)
@@ -87,7 +96,9 @@ const login = async function(request,response){
     expiresIn: 86400 // expires in 24 hours
   });
 
-  response.status(200).send({ auth: true, token: token });
+  var person = await connection.collection('person').find({email: user.email}).toArray();
+  person = person[0];
+  response.status(200).send({ auth: true, token, person});
 }
 module.exports = {
   signup,

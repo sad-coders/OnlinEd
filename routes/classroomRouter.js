@@ -10,12 +10,16 @@ router
     .route('/')
     //.get(classroomController.getAllClassrooms)
     .get(classroomController.getClassroomsOfPerson)//get request with email query (needs to be modified with token)
-    .post(classroomController.insertClassroom)
+    .post(classroomController.createClassroom)
     
 
 router
     .route('/:classroomId')
     .get(classroomController.getClassroom)
     .put(classroomController.updateClassroom)
+
+router
+    .route('/:classroomId/addStudents')
+    .post(classroomController.addStudentsToClassroom)
 
 module.exports = router;

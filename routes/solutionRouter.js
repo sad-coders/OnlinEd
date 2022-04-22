@@ -7,14 +7,14 @@ router
   .route("/")
   .post(solutionController.insertSolution)
   .delete(solutionController.deleteSolution)
-  .put(solutionController.updateSolution);
+  .put(solutionController.marksForSolution); //marks for soln
 
 router
   .route("/student/:StudentId")
   .get(solutionController.getSolutionByStudentId);
 
 router
-  .route("/assignment/:AssignmentId")
+  .route("/assignment/:assignmentId")
   .get(solutionController.getSolutionByAssignmentId);
 
 router

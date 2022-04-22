@@ -8,9 +8,11 @@ router
     .route('/')
     .get(personController.getAllAccounts)
     .post(personController.createAccount) 
-router
-    .route('/:person_id')
     .put(personController.updatePerson)
+
+router
+    .route('/:personId')
+    .put(personController.addPersonToClassroom)
     //.get(personController.getPerson)
 
 module.exports = router
