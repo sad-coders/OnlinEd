@@ -84,7 +84,7 @@ async function addPersonToClassroom (req,res) {
         var classroom = {};
         classroom.classroomId =  newClassroom._id.toString();
         classroom.className =  newClassroom.className;
-        classroom.createdBy =  newClassroom.createdBy;
+        classroom.authorName =  newClassroom.authorName;
         console.log(newClassroom);
         
         console.log(classroom);
