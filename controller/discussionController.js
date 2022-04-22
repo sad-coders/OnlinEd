@@ -26,7 +26,8 @@ exports.getAllQuestionOfClassRoom = async (req, res, next) => {
 exports.addQuestion = async (req, res, next) => {
   try {
     const connection = db.getConnection();
-    var question = req.body.question;
+
+    var question = req.body;
 
     console.log(question);
 
