@@ -167,12 +167,13 @@ exports.insertSolution = async (req, res, next) => {
       return res.status(500).json(err);
     }
 
+    console.log(req.body.solution);
+
     const solution = JSON.parse(req.body.solution);
     solution["link"] = req.file.filename;
-    // console.log(solution);
+    console.log(solution);
 
     // azure upload req.file
-
     async function main() {
       console.log("Azure Blob storage v12 - JavaScript quickstart sample");
       const AZURE_STORAGE_CONNECTION_STRING =
