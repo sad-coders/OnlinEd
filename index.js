@@ -5,7 +5,7 @@ const db = require("./model/db.js");
 const dotenv = require("dotenv");
 const app = express();
 
-app.use(cors({origin: '*'}));
+app.use(cors());
 app.use(express.json());
 
 dotenv.config({ path: "./config/config.env" });
