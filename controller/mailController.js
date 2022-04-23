@@ -54,7 +54,7 @@ exports.sendConfirmationMail = async (mailId, userId,  next) => {
             <body> 
             <h5> Welcome to OnlinEd!!</h5> 
             <p>
-              </a> click <a href="http://${process.env.BASE_URL}/verify/${userId}"> here </a>  
+              </a> click <a href="${process.env.BASE_URL}/verify/${userId}"> here </a>  
             </p>
             <p> Copy Paste the below link into the browser, if it doesn't work. <br> Verification Link: http://${process.env.BASE_URL}/verify/${userId} </p>
             </body>
