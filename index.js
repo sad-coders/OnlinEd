@@ -5,7 +5,7 @@ const db = require("./model/db.js");
 const dotenv = require("dotenv");
 const app = express();
 
-app.use(cors());
+app.use(cors({origin: '*'}));
 app.use(express.json());
 
 dotenv.config({ path: "./config/config.env" });
@@ -19,7 +19,7 @@ const discussion = require("./routes/discussionRouter.js");
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'https://onlined-fe.azurewebsites.net/');
+  res.setHeader('Access-Control-Allow-Origin', 'https://onlined-fe.azurewebsites.net');
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
   // Request methods you wish to allow
