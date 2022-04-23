@@ -24,7 +24,7 @@ const signup = async function(request, response) {
         }, 
         process.env.secret,
         {
-        expiresIn: 86400 // expires in 24 hours
+        //expiresIn: 86400 // expires in 24 hours
       });
 
       // console.log(dbResponse);
@@ -62,8 +62,9 @@ const verify = async function(request, response) {
 }
 
 const verifyToken = async (request,response,next)=>{
-    const token = request.headers['x-access-token'];
-    
+    const token = request.headers['authorization'];
+    //console.log(request.headers)
+    //console.log("verify token",token)
     if (!token) return response.status(401).send({ auth: false, message: 'No token provided.' });
     
     jwt.verify(token, process.env.secret , function(err, decoded) {
@@ -95,6 +96,7 @@ const login = async function(request,response){
   const token = jwt.sign({ email : _user.email }, process.env.secret, {
     expiresIn: 86400 // expires in 24 hours
   });
+  console.log(token)
 
   var person = await connection.collection('person').find({email: user.email}).toArray();
   person = person[0];
