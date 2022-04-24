@@ -7,6 +7,7 @@ exports.getAllQuestionOfClassRoom = async (req, res, next) => {
     const connection = db.getConnection();
 
     let classRoomId = req.params.classRoomId;
+    // console.log(classRoomId);
 
     // find on the basis of type ="question " and on classRoomId. in decending order.
     // return array of objects.
@@ -99,9 +100,9 @@ exports.getAllAnswerOfQuestion = async (req, res, next) => {
 exports.addAnswer = async (req, res, next) => {
   try {
     const connection = db.getConnection();
-    var answer = req.body.answer;
+    var answer = req.body;
 
-    console.log(answer);
+    console.log(req.body);
 
     var insertAnswer = await connection
       .collection(COLLECTION_NAME)
