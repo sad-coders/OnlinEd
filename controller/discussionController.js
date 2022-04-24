@@ -48,6 +48,8 @@ exports.addQuestion = async (req, res, next) => {
 exports.deleteQuestion = async (req, res, next) => {
   try {
     const connection = db.getConnection();
+    console.log(req.body);
+
     const { studentId, authorId, _id } = req.body.question;
 
     console.log(studentId, authorId);
