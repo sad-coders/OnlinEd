@@ -129,6 +129,7 @@ const login = async function (request, response) {
     .find({ email: user.email })
     .toArray();
   person = person[0];
+  person.isVerified = _user.isVerified;
   response.status(200).send({ auth: true, token, person });
 };
 module.exports = {
