@@ -21,4 +21,8 @@ router
   .route("/assignment/:AssignmentId/student/:StudentId")
   .get(solutionController.getSolutionByAssignmentIdAndStudentId);
 
+router
+  .route("/getSolutionDetails/:assignmentId/:studentId")
+  .get(solutionController.getSubmissionDetails)
+
 module.exports = router;

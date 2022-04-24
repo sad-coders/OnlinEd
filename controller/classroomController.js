@@ -1,6 +1,8 @@
 const db = require("../model/db.js");
 const COLLECTION_NAME = "classrooms";
-const crypto = require('crypto')
+const { customAlphabet } = require('nanoid')
+const nanoid = customAlphabet('1234567890abcdef', 6)
+// model.id = nanoid() 
 
 exports.getAllClassrooms = async (req, res, next) => {
   const connection = db.getConnection();
@@ -25,9 +27,10 @@ exports.createClassroom = async (req, res, next) => {
 
   const new_classroom = {
     isActive: false,
-    classcode: crypto.randomUUID(),
-    authorId: '626126cdd3990228bb87b725' /**TODO: author id */,
+    classcode: nanoid(),
+    authorId: req.body.personId, //'626126cdd3990228bb87b725' /**TODO: author id */,
     createdAt: today,
+    authorName: req.body.name,
     className: req.body.className
   }
   const personId = req.body.personId;
@@ -38,14 +41,14 @@ exports.createClassroom = async (req, res, next) => {
     .findOneAndUpdate(
       { _id: personId }, { $push: { classrooms: {
         classroomId : saved_classroom.insertedId,
-        authorName : "Sripad", /**TODO: author name */
+        authorName : req.body.name, /**TODO: author name */
         className : new_classroom.className
       } } },
       { returnDocument: 'after', returnNewDocument: true }
     );
-  //console.log("create classroom updated person", updatedPerson);
+  console.log("create classroom updated person", updatedPerson);
   updatedPerson = updatedPerson.value;
-  res.status(201).send();
+  res.status(201).send({updatedPerson});
 }
 exports.getClassroomsOfPerson = async (req, res, next) => {
   //console.log(req.query.email)

@@ -52,6 +52,7 @@ const getfileDetailsUsingStudentIdAndAssignmentId = async (
     .collection(COLLECTION_NAME)
     .find({ assignmentId: assignmentId, studentId: studentId })
     .toArray();
+  // console.log(solutions);
 
   return solutions;
 };
@@ -396,3 +397,12 @@ exports.deleteSolution = async (req, res, next) => {
   }
   // res.status(200);
 };
+
+
+exports.getSubmissionDetails = async (req,res) => {
+  console.log(req.params.assignmentId,  req.params.studentId)
+  var solutions = await getfileDetailsUsingStudentIdAndAssignmentId(req.params.assignmentId,  req.params.studentId);
+  solutions = solutions[0];
+  // console.log(solutions)
+  res.status(200).send({solution: solutions});
+}
