@@ -167,12 +167,6 @@ exports.insertSolution = async (req, res, next) => {
       return res.status(500).json(err);
     }
 
-    console.log(req.body.solution);
-
-    const solution = JSON.parse(req.body.solution);
-    solution["link"] = req.file.filename;
-    console.log(solution);
-
     // azure upload req.file
     async function main() {
       console.log("Azure Blob storage v12 - JavaScript quickstart sample");
@@ -225,13 +219,43 @@ exports.insertSolution = async (req, res, next) => {
 
     // storing filename and details to the database.
     const connection = db.getConnection();
-    var Solution = solution;
 
-    // console.log(Solution);
+    console.log(req.body.solution);
+
+    const solution = JSON.parse(req.body.solution);
+
+    const { studentId, assignmentId } = solution;
+
+    var GetSolutionWithStudentId =
+      await getfileDetailsUsingStudentIdAndAssignmentId(
+        assignmentId,
+        studentId
+      );
+
+    console.log(GetSolutionWithStudentId[0]);
+    let { _id } = GetSolutionWithStudentId[0];
+
+    // console.log(_id, studentId, assignmentId, link);
+
+    var solutionId = _id;
+    GetSolutionWithStudentId[0].dateOfSubmission = new Date()
+      .toISOString()
+      .slice(0, 10);
+    GetSolutionWithStudentId[0].link = req.file.filename;
+
+    console.log(
+      "Solution before update, link should be empty ",
+      GetSolutionWithStudentId[0]
+    );
 
     var insertedSolution = await connection
       .collection(COLLECTION_NAME)
-      .insertOne(Solution);
+      .findOneAndUpdate(
+        { _id: solutionId },
+        { $set: GetSolutionWithStudentId[0] }
+      );
+
+    // console.log(Solution);
 
     console.log(insertedSolution);
 
@@ -241,55 +265,62 @@ exports.insertSolution = async (req, res, next) => {
 
 updateSolution = async (req) => {
   const connection = db.getConnection();
-  console.log(req)
+  console.log(req);
   try {
     let { _id } = req.body.solution;
-    console.log(req.body.solution)
+    console.log(req.body.solution);
     let solutionId = _id;
 
-    var newMarks,  newObj, newLink;
+    var newMarks, newObj, newLink;
 
-    if(req.body.solution.marks) {
+    if (req.body.solution.marks) {
       newMarks = req.body.solution.marks;
       newObj = {
-        marks: newMarks
+        marks: newMarks,
       };
-    }else {
-      newLink = req.body.solution
+    } else {
+      newLink = req.body.solution;
       newObj = {
         link: newLink,
-        dateOfSubmission: Date.now()
-      }
+        dateOfSubmission: Date.now(),
+      };
     }
 
-    console.log('updating ' + solutionId + ' with link ' + newLink + ' with marks ' + newMarks)
+    console.log(
+      "updating " +
+        solutionId +
+        " with link " +
+        newLink +
+        " with marks " +
+        newMarks
+    );
     //   console.log(studentId, assignmentId, link, date, deadline, _id);
-    
+
     var updatedSolution = await connection
       .collection(COLLECTION_NAME)
-      .findOneAndUpdate({_id: solutionId}, 
-        { $set: newObj},
-        {returnDocument: 'after',returnNewDocument: true}
+      .findOneAndUpdate(
+        { _id: solutionId },
+        { $set: newObj },
+        { returnDocument: "after", returnNewDocument: true }
       );
     console.log(updatedSolution);
     return updatedSolution.value;
-
   } catch (error) {
     console.log(error);
     return error;
   }
 };
 
-exports.marksForSolution = async(req,res,next) => {
-  try{
-    console.log(req.body.solution)
+exports.marksForSolution = async (req, res, next) => {
+  try {
+    console.log(req.body.solution);
     var updatedSolution = await updateSolution(req);
 
     res.status(200).json({ status: "success", updatedSolution });
-  }catch (error) {
+  } catch (error) {
     res.status(500).send({ message: "Failed" });
   }
-}
+};
 
 exports.deleteSolution = async (req, res, next) => {
   const connection = db.getConnection();
@@ -308,14 +339,17 @@ exports.deleteSolution = async (req, res, next) => {
 
     // console.log(_id, studentId, assignmentId, link);
 
+    const LinkToDeleteFromAzure = link;
     var solutionId = _id;
+    solution[0].link = "";
+    solution[0].dateOfSubmission = "";
 
-    console.log(studentId);
-    console.log(assignmentId);
+    console.log("Solution before deletion, link should be empty ", solution);
 
     var deletedSolution = await connection
       .collection(COLLECTION_NAME)
-      .deleteMany({ _id: solutionId });
+      .findOneAndUpdate({ _id: solutionId }, { $set: solution[0] });
+    // .deleteMany({ _id: solutionId });
 
     console.log(deletedSolution);
 
@@ -343,7 +377,9 @@ exports.deleteSolution = async (req, res, next) => {
       // blockBlobClient.deleteBlobs();
 
       // const blobDeleteResponse = blockBlobClient.delete();
-      const blobDeleteResponse = containerClient.deleteBlob(link);
+      const blobDeleteResponse = containerClient.deleteBlob(
+        LinkToDeleteFromAzure
+      );
 
       console.log(
         "Blob was Deleted successfully. requestId: ",
