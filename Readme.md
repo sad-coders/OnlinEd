@@ -27,18 +27,20 @@ A wholesome website for better online mode of intraction between Teachers and St
 - Blob storage.
 ## Screenshots
 
-![App Screenshot](https://raw.githubusercontent.com/sad-coders/OnlinEd/master/PIC/1.jpeg?token=GHSAT0AAAAAABWWGBMBNAAI6JQ5HJLSIYHIYWUKQ6A)
-![App Screenshot](https://raw.githubusercontent.com/sad-coders/OnlinEd/master/PIC/2.jpeg?token=GHSAT0AAAAAABWWGBMBUWKSSRSO4BXY2KLUYWUKTCQ)
-![App Screenshot](https://raw.githubusercontent.com/sad-coders/OnlinEd/master/PIC/3.jpeg?token=GHSAT0AAAAAABWWGBMBDP3T3KRFJ3ZYZ44IYWUKUEA)
-![App Screenshot]()
-![App Screenshot]()
-![App Screenshot]()
-![App Screenshot]()
-![App Screenshot]()
-![App Screenshot]()
-![App Screenshot]()
-![App Screenshot]()
-![App Screenshot]()
-![App Screenshot]()
-![App Screenshot]()
+![App Screenshot](/PIC/1.jpeg)
+![App Screenshot](/PIC/2.jpeg)
+![App Screenshot](/PIC/3.jpeg)
+![App Screenshot](/PIC/4.jpeg)
+![App Screenshot](/PIC/5.jpeg)
+![App Screenshot](/PIC/6.jpeg)
+![App Screenshot](/PIC/7.jpeg)
+![App Screenshot](/PIC/8.jpeg)
+![App Screenshot](/PIC/9.jpeg)
+![App Screenshot](/PIC/10.jpeg)
+![App Screenshot](/PIC/11.jpeg)
+![App Screenshot](/PIC/12.jpeg)
+![App Screenshot](/PIC/13.jpeg)
+![App Screenshot](/PIC/14.jpeg)
+
+
 
