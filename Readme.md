@@ -11,9 +11,9 @@ A wholesome website for better online mode of intraction between Teachers and St
 
 ## Technologies Used
 
-#### Frontend-  ReactJs
-#### Backend- NodeJs
-#### Database- cosmos db
+- Frontend-  ReactJs
+- Backend- NodeJs
+- Database- cosmos db
 
 
 
