@@ -54,11 +54,11 @@ A wholesome website for better online mode of intraction between Teachers and St
 
 ![App Screenshot](/PIC/5.jpeg)
 
--Classrooms that Student has joined.
+- Classrooms that Student has joined.
 
 ![App Screenshot](/PIC/6.jpeg)
 
--Assignment View.
+- Assignment View.
 
 ![App Screenshot](/PIC/13.jpeg)
 
