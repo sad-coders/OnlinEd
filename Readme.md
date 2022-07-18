@@ -30,6 +30,46 @@ A wholesome website for better online mode of intraction between Teachers and St
 ### Login. 
 ![App Screenshot](/PIC/4.jpeg)
 
+### Teacher View.
+
+- Create New Classroom.
+
+ ![App Screenshot](/PIC/9.jpeg)
+
+- Check Assignement submited by Students.
+
+ ![App Screenshot](/PIC/11.jpeg)
+ 
+ ![App Screenshot](/PIC/12.jpeg)
+
+
+
+- Assignment Upload.
+
+![App Screenshot](/PIC/10.jpeg)
+
+### Student View.
+
+- Join Classroom with help for Class Code provided by Teacher.
+
+![App Screenshot](/PIC/5.jpeg)
+
+-Classrooms that Student has joined.
+
+![App Screenshot](/PIC/6.jpeg)
+
+-Assignment View.
+
+![App Screenshot](/PIC/13.jpeg)
+
+
+- Uploading the  Assignemnt 
+
+![App Screenshot](/PIC/7.jpeg)
+
+![App Screenshot](/PIC/8.jpeg)
+
+
 ### Discussion Portal.
 - Portal for each class where student can discuss and answer each other.
 
@@ -41,31 +81,6 @@ A wholesome website for better online mode of intraction between Teachers and St
 
 ![App Screenshot](/PIC/3.jpeg)
 
-### Teacher View.
-
-![App Screenshot](/PIC/11.jpeg)
-![App Screenshot](/PIC/12.jpeg)
-![App Screenshot](/PIC/9.jpeg)
-
-- Assignment Upload.
-![App Screenshot](/PIC/10.jpeg)
-
-### Student View.
-
--Join Classroom with help for Class Code provided by Teacher.
-![App Screenshot](/PIC/5.jpeg)
-
--Classrooms that Student has joined.
-![App Screenshot](/PIC/6.jpeg)
-
--Assignment View.
-![App Screenshot](/PIC/13.jpeg)
-
-
-- Uploading the  Assignemnt 
-
-![App Screenshot](/PIC/7.jpeg)
-![App Screenshot](/PIC/8.jpeg)
 
 
 
